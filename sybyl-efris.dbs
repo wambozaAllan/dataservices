@@ -1,0 +1,69 @@
+<data name="sybyl-efris" transports="http https local">
+   <config enableOData="false" id="navEfris">
+      <property name="driverClassName">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+      <property name="url">jdbc:sqlserver://localhost:1433;databaseName=NAV-EFRIS</property>
+      <property name="username">efris</property>
+      <property name="password">password@123</property>
+   </config>
+   <query id="companyInformation" useConfig="navEfris">
+      <sql>SELECT &#xd;Name as businessName,&#xd;Address as address,&#xd;"Phone No_" as linePhone,&#xd;"VAT Registration No_" as tin,&#xd;"E-Mail" as emailAddress,&#xd;MinBRN as ninBrn,&#xd;"Legal Name" as legalName,&#xd;"Mobile Phone" as mobilePhone,&#xd;"Place Of Business"  as placeOfBusiness,  "Reference No_" as referenceNo,&#xd;"Branch Id" as branchId &#xd;FROM "SYBYL Ltd_$Company Information";</sql>
+      <result outputType="json">{&#xd; "company": {&#xd; "details": [&#xd; {&#xd; "tin": "$tin",&#xd;"ninBrn": "$ninBrn",&#xd;"legalName": "$legalName",&#xd;"businessName": "$businessName",&#xd;"address": "$address",&#xd;"mobilePhone": "$mobilePhone",&#xd;"linePhone": "$linePhone",&#xd;"emailAddress": "$emailAddress",&#xd;"placeOfBusiness": "$placeOfBusiness",&#xd;"referenceNo": "$referenceNo",&#xd;"branchId": "$branchId"&#xd; }&#xd; ]&#xd; }&#xd;}</result>
+   </query>
+   <query id="allInvoiceHeaders" useConfig="navEfris">
+      <sql>SELECT &#xd;"No_" as antifakeCode,&#xd;"Sell-to Customer No_" as customerNumber,&#xd;"Currency Code" as currency,&#xd;"Salesperson Code" as operator,&#xd;"Sell-to Customer Name" as customerName,&#xd;"Document Date" as documentDate,&#xd;"External Document No_" as invoiceNo,&#xd;"URA Ref No_" as oriInvoiceId,&#xd;"Gen_ Bus_ Posting Group" as invoiceType,&#xd;"Customer Posting Group" as invoiceIndustryCode&#xd;FROM "SYBYL Ltd_$Sales Invoice Header";</sql>
+      <result outputType="json">{&#xd; "invoiceHeaders": {&#xd; "header": [&#xd; {&#xd;"antifakeCode":"$antifakeCode",&#xd;"customerNumber":"$customerNumber",&#xd;"currency":"$currency",&#xd;"operator":"$operator",&#xd;"customerName":"$customerName",&#xd;"documentDate":"$documentDate",&#xd;"invoiceNo":"$invoiceNo",&#xd;"oriInvoiceId":"$oriInvoiceId",&#xd;"invoiceType": "$invoiceType",&#xd;"invoiceKind":"$invoiceType",&#xd;"invoiceIndustryCode":"$invoiceIndustryCode"&#xd; }&#xd; ]&#xd; }}</result>
+   </query>
+   <query id="specificInvoiceHeader" useConfig="navEfris">
+      <sql>SELECT &#xd;"No_" as antifakeCode,&#xd;"Sell-to Customer No_" as customerNumber,&#xd;"Currency Code" as currency,&#xd;"Salesperson Code" as operator,&#xd;"Sell-to Customer Name" as customerName,&#xd;"Document Date" as documentDate,&#xd;"External Document No_" as invoiceNo,&#xd;"URA Ref No_" as oriInvoiceId,&#xd;"Gen_ Bus_ Posting Group" as invoiceType,&#xd;"Customer Posting Group" as invoiceIndustryCode&#xd;FROM "SYBYL Ltd_$Sales Invoice Header" &#xd;WHERE "No_" = (:documentNumber)</sql>
+      <result outputType="json">{&#xd; "invoiceHeader": {&#xd; "header": [&#xd; {&#xd;"antifakeCode":"$antifakeCode",&#xd;"customerNumber":"$customerNumber",&#xd;"currency":"$currency",&#xd;"operator":"$operator",&#xd;"customerName":"$customerName",&#xd;"documentDate":"$documentDate",&#xd;"invoiceNo":"$invoiceNo",&#xd;"oriInvoiceId":"$oriInvoiceId",&#xd;"invoiceType": "$invoiceType",&#xd;"invoiceKind":"$invoiceType",&#xd;"invoiceIndustryCode":"$invoiceIndustryCode"&#xd; }&#xd; ]&#xd; }}</result>
+      <param name="documentNumber" sqlType="STRING"/>
+   </query>
+   <query id="specificInvoiceLines" useConfig="navEfris">
+      <sql>SELECT &#xd;Description as item,&#xd;"Unit of Measure" as unitOfMeasure,&#xd;Quantity as qty,&#xd;"Unit Price" as unitPrice,&#xd;"VAT %" as taxRate,&#xd;"Line Discount %" as discountTaxRate,&#xd;"Line Discount Amount" as discountTotal,&#xd;Amount as total,&#xd;"Amount Including VAT" as amountIncludingVat,&#xd;"VAT Prod_ Posting Group" as vatProdPostingGroup,&#xd;"Item Product Code" as goodsCategoryId,&#xd;Discount as discountFlag,&#xd;"Deemed Flag" as deemedFlag,&#xd;"Excise Flag" as exciseFlag&#xd;FROM "SYBYL Ltd_$Sales Invoice Line"&#xd;WHERE "Document No_" = (:documentNumber);</sql>
+      <result outputType="json">{&#xd; "invoiceLines": {&#xd; "line": [&#xd; {&#xd;"item":"$item",&#xd;"unitOfMeasure":"$unitOfMeasure",&#xd;"qty":"$qty",&#xd;"unitPrice":"$unitPrice",&#xd;"taxRate":"$taxRate",&#xd;"discountTaxRate":"$discountTaxRate",&#xd;"discountTotal":"$discountTotal",&#xd;"total":"$total",&#xd;"amountIncludingVat":"$amountIncludingVat",&#xd;"vatProdPostingGroup":"$vatProdPostingGroup",&#xd;"itemProductCode":"$goodsCategoryId",&#xd;"discountFlag":"$discountFlag",&#xd;"deemedFlag":"$deemedFlag",&#xd;"exciseFlag":"$exciseFlag"&#xd; }&#xd; ]&#xd; }&#xd;}</result>
+      <param name="documentNumber" sqlType="STRING"/>
+   </query>
+   <query id="allCreditNoteHeaders" useConfig="navEfris">
+      <sql>SELECT&#xd;"No_" as creditNoteNo&#xd;,"Sell-to Customer No_" as customerNo&#xd;,"Bill-to Name" as customerName&#xd;,"Your Reference" as sellersReferenceNo&#xd;,"Currency Code" as currency&#xd;,"Prices Including VAT" as pricesIncludingVat&#xd;,"Salesperson Code" as operator&#xd;,"Reason Code" as reasonCode&#xd;,"Document Date" as applicationTime&#xd;,"External Document No_" as externalDocumentNo&#xd;,"URA Ref No_" as uraReferenceNo&#xd;,"Email" as contactEmail&#xd;,"URA Orignal Invoice No_" as oriInvoiceNo&#xd;,"URA Code" as qrcode&#xd;FROM "SYBYL Ltd_$Sales Cr_Memo Header";</sql>
+      <result outputType="json">{&#xd; "creditNoteHeaders": {&#xd; "header": [&#xd; {&#xd;"creditNoteNo":"$creditNoteNo",&#xd;"customerNo":"$customerNo",&#xd;"customerName":"$customerName",&#xd;"sellersReferenceNo":"$sellersReferenceNo",&#xd;"currency":"$currency",&#xd;"pricesIncludingVat":"$pricesIncludingVat",&#xd;"operator":"$operator",&#xd;"reasonCode":"$reasonCode",&#xd;"applicationTime":"$applicationTime",&#xd;"externalDocumentNo":"$externalDocumentNo",&#xd;"uraReferenceNo":"$uraReferenceNo",&#xd;"contactEmail":"$contactEmail",&#xd;"oriInvoiceNo":"$oriInvoiceNo",&#xd;"qrcode":"$qrcode"&#xd; }&#xd; ]&#xd; }&#xd;}</result>
+   </query>
+   <query id="specificCreditNoteHeader" useConfig="navEfris">
+      <sql>SELECT&#xd;"No_" as creditNoteNo&#xd;,"Sell-to Customer No_" as customerNo&#xd;,"Bill-to Name" as customerName&#xd;,"Your Reference" as sellersReferenceNo&#xd;,"Currency Code" as currency&#xd;,"Prices Including VAT" as pricesIncludingVat&#xd;,"Salesperson Code" as operator&#xd;,"Reason Code" as reasonCode&#xd;,"Document Date" as applicationTime&#xd;,"External Document No_" as externalDocumentNo&#xd;,"URA Ref No_" as uraReferenceNo&#xd;,"Email" as contactEmail&#xd;,"URA Orignal Invoice No_" as oriInvoiceNo&#xd;,"URA Code" as qrcode&#xd;FROM "SYBYL Ltd_$Sales Cr_Memo Header" &#xd;WHERE "No_" = (:creditNoteNo);</sql>
+      <result outputType="json">{&#xd; "creditNoteHeader": {&#xd; "header": [&#xd; {&#xd;"creditNoteNo":"$creditNoteNo",&#xd;"customerNo":"$customerNo",&#xd;"customerName":"$customerName",&#xd;"sellersReferenceNo":"$sellersReferenceNo",&#xd;"currency":"$currency",&#xd;"pricesIncludingVat":"$pricesIncludingVat",&#xd;"operator":"$operator",&#xd;"reasonCode":"$reasonCode",&#xd;"applicationTime":"$applicationTime",&#xd;"externalDocumentNo":"$externalDocumentNo",&#xd;"uraReferenceNo":"$uraReferenceNo",&#xd;"contactEmail":"$contactEmail",&#xd;"oriInvoiceNo":"$oriInvoiceNo",&#xd;"qrcode":"$qrcode"&#xd; }&#xd; ]&#xd; }&#xd;}</result>
+      <param name="creditNoteNo" sqlType="STRING"/>
+   </query>
+   <query id="specficCreditNoteLines" useConfig="navEfris">
+      <sql>SELECT&#xd;      [Description] as item&#xd;      ,[Unit of Measure] as unitOfMeasure&#xd;      ,[Quantity] as qty&#xd;      ,[Unit Price] as unitPrice&#xd;      ,[VAT %] as taxRate&#xd;      ,[Line Discount %] discountTaxRate&#xd;      ,[Line Discount Amount] as discountTotal&#xd;      ,[Amount] as total&#xd;      ,[Amount Including VAT] as amountIncludingVat&#xd;      ,"Item Product Code" as goodsCategoryId&#xd;      ,Discount as discountFlag&#xd;      ,"Deemed Flag" as deemedFlag&#xd;      ,"Excise Flag" as exciseFlag&#xd;  FROM "SYBYL Ltd_$Sales Cr_Memo Line"&#xd;WHERE "Document No_" = (:creditNoteNo);</sql>
+      <result outputType="json">{&#xd; "creditNoteLines": {&#xd; "line": [&#xd; {&#xd;"item":"$item",&#xd;"unitOfMeasure":"$unitOfMeasure",&#xd;"qty":"$qty",&#xd;"unitPrice":"$unitPrice",&#xd;"taxRate":"$taxRate",&#xd;"discountTaxRate":"$discountTaxRate",&#xd;"discountTotal":"$discountTotal",&#xd;"total":"$total",&#xd;"amountIncludingVat":"$amountIncludingVat",&#xd;"goodsCategoryId":"$goodsCategoryId",&#xd;"discountFlag":"$discountFlag",&#xd;"deemedFlag":"$deemedFlag",&#xd;"exciseFlag":"$exciseFlag"&#xd; }&#xd; ]&#xd; }&#xd;}</result>
+      <param name="creditNoteNo" sqlType="STRING"/>
+   </query>
+   <resource method="GET" path="getCompanyInformation">
+      <call-query href="companyInformation"/>
+   </resource>
+   <resource method="GET" path="getAllInvoiceHeaders">
+      <call-query href="allInvoiceHeaders"/>
+   </resource>
+   <resource method="GET" path="getSpecificInvoiceHeader">
+      <call-query href="specificInvoiceHeader">
+         <with-param name="documentNumber" query-param="documentNumber"/>
+      </call-query>
+   </resource>
+   <resource method="GET" path="getSpecificInvoiceLines">
+      <call-query href="specificInvoiceLines">
+         <with-param name="documentNumber" query-param="documentNumber"/>
+      </call-query>
+   </resource>
+   <resource method="GET" path="getAllCreditNoteHeaders">
+      <call-query href="allCreditNoteHeaders"/>
+   </resource>
+   <resource method="GET" path="getSpecificCreditNoteHeader">
+      <call-query href="specificCreditNoteHeader">
+         <with-param name="creditNoteNo" query-param="creditNoteNo"/>
+      </call-query>
+   </resource>
+   <resource method="GET" path="getSpecificCreditNoteLines">
+      <call-query href="specficCreditNoteLines">
+         <with-param name="creditNoteNo" query-param="creditNoteNo"/>
+      </call-query>
+   </resource>
+</data>
