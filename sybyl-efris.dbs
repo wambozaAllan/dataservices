@@ -24,12 +24,12 @@
       <param name="documentNumber" sqlType="STRING"/>
    </query>
    <query id="allCreditNoteHeaders" useConfig="navEfris">
-      <sql>SELECT&#xd;"No_" as creditNoteNo&#xd;,"Sell-to Customer No_" as customerNo&#xd;,"Bill-to Name" as customerName&#xd;,"Your Reference" as reason&#xd;,"Currency Code" as currency&#xd;,"Prices Including VAT" as pricesIncludingVat&#xd;,"Salesperson Code" as operator&#xd;,"Reason Code" as reasonCode&#xd;,"Document Date" as applicationTime&#xd;,"External Document No_" as externalDocumentNo&#xd;,"URA Ref No_" as uraReferenceNo&#xd;,"Email" as contactEmail&#xd;,"URA Orignal Invoice No_" as oriInvoiceNo&#xd;,"URA Code" as qrcode&#xd;FROM "SYBYL Ltd_$Sales Cr_Memo Header"&#xd;Order By "No_" DESC;</sql>
-      <result outputType="json">{&#xd; "creditNoteHeaders": {&#xd; "header": [&#xd; {&#xd;"creditNoteNo":"$creditNoteNo",&#xd;"customerNo":"$customerNo",&#xd;"customerName":"$customerName",&#xd;"reason":"$reason",&#xd;"currency":"$currency",&#xd;"pricesIncludingVat":"$pricesIncludingVat",&#xd;"operator":"$operator",&#xd;"reasonCode":"$reasonCode",&#xd;"applicationTime":"$applicationTime",&#xd;"externalDocumentNo":"$externalDocumentNo",&#xd;"uraReferenceNo":"$uraReferenceNo",&#xd;"contactEmail":"$contactEmail",&#xd;"oriInvoiceNo":"$oriInvoiceNo",&#xd;"qrcode":"$qrcode",&#xd; }&#xd; ]&#xd; }&#xd;}</result>
+      <sql>SELECT&#xd;"No_" as creditNoteNo&#xd;,"Sell-to Customer No_" as customerNo&#xd;,"Bill-to Name" as customerName&#xd;,"Your Reference" as reason&#xd;,"Currency Code" as currency&#xd;,"Tax Area Code" as verificationCode&#xd;,"Prices Including VAT" as pricesIncludingVat&#xd;,"Salesperson Code" as operator&#xd;,"Reason Code" as reasonCode&#xd;,"Document Date" as applicationTime&#xd;,"External Document No_" as externalDocumentNo&#xd;,"URA Ref No_" as uraReferenceNo&#xd;,"Email" as contactEmail&#xd;,"URA Orignal Invoice No_" as oriInvoiceNo&#xd;,"URA Code" as qrcode&#xd;FROM "SYBYL Ltd_$Sales Cr_Memo Header"&#xd;Order By "No_" DESC;</sql>
+      <result outputType="json">{&#xd; "creditNoteHeaders": {&#xd; "header": [&#xd; {&#xd;"creditNoteNo":"$creditNoteNo",&#xd;"customerNo":"$customerNo",&#xd;"customerName":"$customerName",&#xd;"reason":"$reason",&#xd;"currency":"$currency",&#xd;"pricesIncludingVat":"$pricesIncludingVat",&#xd;"operator":"$operator",&#xd;"reasonCode":"$reasonCode",&#xd;"applicationTime":"$applicationTime",&#xd;"externalDocumentNo":"$externalDocumentNo",&#xd;"uraReferenceNo":"$uraReferenceNo",&#xd;"contactEmail":"$contactEmail",&#xd;"oriInvoiceNo":"$oriInvoiceNo",&#xd;"verificationCode":"$verificationCode",&#xd;"qrcode":"$qrcode",&#xd; }&#xd; ]&#xd; }&#xd;}</result>
    </query>
    <query id="specificCreditNoteHeader" useConfig="navEfris">
-      <sql>SELECT&#xd;"No_" as creditNoteNo&#xd;,"Sell-to Customer No_" as customerNo&#xd;,"Bill-to Name" as customerName&#xd;,"Your Reference" as reason&#xd;,"Currency Code" as currency&#xd;,"Prices Including VAT" as pricesIncludingVat&#xd;,"Salesperson Code" as operator&#xd;,"Reason Code" as reasonCode&#xd;,"Document Date" as applicationTime&#xd;,"External Document No_" as externalDocumentNo&#xd;,"URA Ref No_" as uraReferenceNo&#xd;,"Email" as contactEmail&#xd;,"URA Orignal Invoice No_" as oriInvoiceNo&#xd;,"URA Code" as qrcode&#xd;FROM "SYBYL Ltd_$Sales Cr_Memo Header" &#xd;WHERE "No_" = (:creditNoteNo);</sql>
-      <result outputType="json">{&#xd; "creditNoteHeader": {&#xd; "header": [&#xd; {&#xd;"creditNoteNo":"$creditNoteNo",&#xd;"customerNo":"$customerNo",&#xd;"customerName":"$customerName",&#xd;"reason":"$reason",&#xd;"currency":"$currency",&#xd;"pricesIncludingVat":"$pricesIncludingVat",&#xd;"operator":"$operator",&#xd;"reasonCode":"$reasonCode",&#xd;"applicationTime":"$applicationTime",&#xd;"externalDocumentNo":"$externalDocumentNo",&#xd;"uraReferenceNo":"$uraReferenceNo",&#xd;"contactEmail":"$contactEmail",&#xd;"oriInvoiceNo":"$oriInvoiceNo",&#xd;"qrcode":"$qrcode"&#xd; }&#xd; ]&#xd; }&#xd;}</result>
+      <sql>SELECT&#xd;"No_" as creditNoteNo&#xd;,"Sell-to Customer No_" as customerNo&#xd;,"Tax Area Code" as verificationCode&#xd;,"Bill-to Name" as customerName&#xd;,"Your Reference" as reason&#xd;,"Currency Code" as currency&#xd;,"Prices Including VAT" as pricesIncludingVat&#xd;,"Salesperson Code" as operator&#xd;,"Reason Code" as reasonCode&#xd;,"Document Date" as applicationTime&#xd;,"External Document No_" as externalDocumentNo&#xd;,"URA Ref No_" as uraReferenceNo&#xd;,"Email" as contactEmail&#xd;,"URA Orignal Invoice No_" as oriInvoiceNo&#xd;,"URA Code" as qrcode&#xd;FROM "SYBYL Ltd_$Sales Cr_Memo Header" &#xd;WHERE "No_" = (:creditNoteNo);</sql>
+      <result outputType="json">{&#xd; "creditNoteHeader": {&#xd; "header": [&#xd; {&#xd;"creditNoteNo":"$creditNoteNo",&#xd;"customerNo":"$customerNo",&#xd;"customerName":"$customerName",&#xd;"reason":"$reason",&#xd;"currency":"$currency",&#xd;"pricesIncludingVat":"$pricesIncludingVat",&#xd;"operator":"$operator",&#xd;"reasonCode":"$reasonCode",&#xd;"applicationTime":"$applicationTime",&#xd;"externalDocumentNo":"$externalDocumentNo",&#xd;"uraReferenceNo":"$uraReferenceNo",&#xd;"contactEmail":"$contactEmail",&#xd;"oriInvoiceNo":"$oriInvoiceNo",&#xd;"verificationCode":"$verificationCode",&#xd;"qrcode":"$qrcode"&#xd; }&#xd; ]&#xd; }&#xd;}</result>
       <param name="creditNoteNo" sqlType="STRING"/>
    </query>
    <query id="specficCreditNoteLines" useConfig="navEfris">
@@ -85,6 +85,12 @@
       <sql>SELECT&#xd;      "SYBYL Ltd_$Sales Cr_Memo Line".[Description] as item,&#xd;"No_" as itemCode&#xd;      ,"SYBYL Ltd_$Unit of Measure".[URA Code] as unitOfMeasure&#xd;      ,[Quantity] as qty&#xd;      ,[Unit Price] as unitPrice&#xd;      ,[VAT %] as taxRate&#xd;      ,[Line Discount %] discountTaxRate&#xd;      ,[Line Discount Amount] as discountTotal&#xd;      ,[Amount] as total&#xd;      ,[Amount Including VAT] as amountIncludingVat&#xd;      ,"URA Category COde" as goodsCategoryId&#xd;      ,Discount as discountFlag&#xd;      ,"Deemed Flag" as deemedFlag&#xd;      ,"Excise Flag" as exciseFlag,&#xd;"Bill-to Customer No_" as customerNo,&#xd;"VAT Prod_ Posting Group" as taxCategory&#xd;  FROM "SYBYL Ltd_$Service Cr_Memo Line"&#xd;  LEFT OUTER JOIN "SYBYL Ltd_$Unit of Measure"&#xd;  ON "SYBYL Ltd_$Service Cr_Memo Line".[Unit of Measure] = "SYBYL Ltd_$Unit of Measure".Code&#xd;LEFT OUTER JOIN [SYBYL Ltd_$Item Category]&#xd;ON "SYBYL Ltd_$Service Cr_Memo Line".[Item Category Code] = "SYBYL Ltd_$Item Category".Code&#xd;WHERE "Document No_" = (:creditNoteNo) and "SYBYL Ltd_$Sales Cr_Memo Line".Type = 2;</sql>
       <result outputType="json">{&#xd; "creditNoteLines": {&#xd; "line": [&#xd; {&#xd;"item":"$item",&#xd;"itemCode":"$itemCode",&#xd;"unitOfMeasure":"$unitOfMeasure",&#xd;"qty":"$qty",&#xd;"unitPrice":"$unitPrice",&#xd;"taxRate":"$taxRate",&#xd;"discountTaxRate":"$discountTaxRate",&#xd;"discountTotal":"$discountTotal",&#xd;"total":"$total",&#xd;"amountIncludingVat":"$amountIncludingVat",&#xd;"goodsCategoryId":"$goodsCategoryId",&#xd;"discountFlag":"$discountFlag",&#xd;"deemedFlag":"$deemedFlag",&#xd;"exciseFlag":"$exciseFlag",&#xd;"customerNo":"$customerNo",&#xd;"taxCategory":"$taxCategory"}&#xd; ]&#xd; }&#xd;}</result>
       <param name="creditNoteNo" sqlType="STRING"/>
+   </query>
+   <query id="updateCreditNoteId" useConfig="navEfris">
+      <sql>UPDATE "SYBYL Ltd_$Sales Cr_Memo Header" &#xd;SET&#xd;"URA Ref No_" = (:uraRefNo),&#xd;"URA Code" = (:qrcode)&#xd;WHERE "No_" = (:documentNumber)</sql>
+      <param name="uraRefNo" sqlType="STRING"/>
+      <param name="documentNumber" sqlType="STRING"/>
+      <param name="qrcode" sqlType="STRING"/>
    </query>
    <resource method="GET" path="getCompanyInformation">
       <call-query href="companyInformation"/>
@@ -162,6 +168,13 @@
    <resource method="GET" path="getSpecificServiceCreditNoteLines">
       <call-query href="specficServiceCreditNoteLines">
          <with-param name="creditNoteNo" query-param="creditNoteNo"/>
+      </call-query>
+   </resource>
+   <resource method="PUT" path="updateCreditNoteID" returnRequestStatus="true">
+      <call-query href="updateCreditNoteId">
+         <with-param name="uraRefNo" query-param="uraRefNo"/>
+         <with-param name="documentNumber" query-param="documentNumber"/>
+         <with-param name="qrcode" query-param="qrcode"/>
       </call-query>
    </resource>
 </data>
