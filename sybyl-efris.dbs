@@ -1,4 +1,4 @@
-<data name="sybyl-efris" transports="http https local">
+<data enableBatchRequests="true" name="sybyl-efris" transports="http https local">
    <config enableOData="false" id="navEfris">
       <property name="driverClassName">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
       <property name="url">jdbc:sqlserver://localhost:1433;databaseName=NAV-EFRIS</property>
@@ -68,7 +68,7 @@
       <param name="documentNumber" sqlType="STRING"/>
    </query>
    <query id="specificServiceInvoiceLines" useConfig="navEfris">
-      <sql>SELECT &#xd;"SYBYL Ltd_$Sales Invoice Line".Description as item,&#xd;Quantity as qty,&#xd;"Unit Price" as unitPrice,&#xd;"VAT %" as taxRate,&#xd;"Line Discount %" as discountTaxRate,&#xd;"Line Discount Amount" as discountTotal,&#xd;Amount as total,&#xd;"Amount Including VAT" as amountIncludingVat,&#xd;"VAT Prod_ Posting Group" as vatProdPostingGroup,&#xd;"URA Category COde" as goodsCategoryId,&#xd;Discount as discountFlag,&#xd;"Deemed Flag" as deemedFlag,&#xd;"Excise Flag" as exciseFlag,&#xd;"No_" as itemCode,&#xd;"Bill-to Customer No_" as customerNo,&#xd;"SYBYL Ltd_$Unit of Measure".[URA Code] as unitOfMeasure&#xd;FROM "SYBYL Ltd_$Service Invoice Line" &#xd;LEFT OUTER JOIN [SYBYL Ltd_$Item Category]&#xd;ON "SYBYL Ltd_$Service Invoice Line".[Item Category Code] = "SYBYL Ltd_$Item Category".Code&#xd;LEFT OUTER JOIN [SYBYL Ltd_$Unit of Measure]&#xd;ON "SYBYL Ltd_$Service Invoice Line".[Unit of Measure] = "SYBYL Ltd_$Unit of Measure".[Code]&#xd;Where "SYBYL Ltd_$Service Invoice Line"."Document No_" =  (:documentNumber) and "SYBYL Ltd_$Service Invoice Line".Type = 2;</sql>
+      <sql>SELECT &#xd;Description as item,&#xd;Quantity as qty,&#xd;"Unit Price" as unitPrice,&#xd;"VAT %" as taxRate,&#xd;"Line Discount %" as discountTaxRate,&#xd;"Line Discount Amount" as discountTotal,&#xd;Amount as total,&#xd;"Amount Including VAT" as amountIncludingVat,&#xd;"VAT Prod_ Posting Group" as vatProdPostingGroup,&#xd;"Item Category Code" as goodsCategoryId,&#xd;Discount as discountFlag,&#xd;"Deemed Flag" as deemedFlag,&#xd;"Excise Flag" as exciseFlag,&#xd;"No_" as itemCode,&#xd;"Bill-to Customer No_" as customerNo,&#xd;"Unit of Measure" as unitOfMeasure&#xd;FROM "SYBYL Ltd_$Service Invoice Line" &#xd;Where "Document No_" =  (:documentNumber) and Type = 2;</sql>
       <result outputType="json">{&#xd; "invoiceLines": {&#xd; "line": [&#xd; {&#xd;"item":"$item",&#xd;"itemCode":"$itemCode",&#xd;"unitOfMeasure":"$unitOfMeasure",&#xd;"qty":"$qty",&#xd;"unitPrice":"$unitPrice",&#xd;"taxRate":"$taxRate",&#xd;"discountTaxRate":"$discountTaxRate",&#xd;"discountTotal":"$discountTotal",&#xd;"total":"$total",&#xd;"amountIncludingVat":"$amountIncludingVat",&#xd;"vatProdPostingGroup":"$vatProdPostingGroup",&#xd;"goodsCategoryId":"$goodsCategoryId",&#xd;"discountFlag":"$discountFlag",&#xd;"deemedFlag":"$deemedFlag",&#xd;"exciseFlag":"$exciseFlag",&#xd;"customerNo":"$customerNo"&#xd; }&#xd; ]&#xd; }&#xd;}</result>
       <param name="documentNumber" sqlType="STRING"/>
    </query>
@@ -82,7 +82,7 @@
       <param name="creditNoteNo" sqlType="STRING"/>
    </query>
    <query id="specficServiceCreditNoteLines" useConfig="navEfris">
-      <sql>SELECT&#xd;      "SYBYL Ltd_$Sales Cr_Memo Line".[Description] as item,&#xd;"No_" as itemCode&#xd;      ,"SYBYL Ltd_$Unit of Measure".[URA Code] as unitOfMeasure&#xd;      ,[Quantity] as qty&#xd;      ,[Unit Price] as unitPrice&#xd;      ,[VAT %] as taxRate&#xd;      ,[Line Discount %] discountTaxRate&#xd;      ,[Line Discount Amount] as discountTotal&#xd;      ,[Amount] as total&#xd;      ,[Amount Including VAT] as amountIncludingVat&#xd;      ,"URA Category COde" as goodsCategoryId&#xd;      ,Discount as discountFlag&#xd;      ,"Deemed Flag" as deemedFlag&#xd;      ,"Excise Flag" as exciseFlag,&#xd;"Bill-to Customer No_" as customerNo,&#xd;"VAT Prod_ Posting Group" as taxCategory&#xd;  FROM "SYBYL Ltd_$Service Cr_Memo Line"&#xd;  LEFT OUTER JOIN "SYBYL Ltd_$Unit of Measure"&#xd;  ON "SYBYL Ltd_$Service Cr_Memo Line".[Unit of Measure] = "SYBYL Ltd_$Unit of Measure".Code&#xd;LEFT OUTER JOIN [SYBYL Ltd_$Item Category]&#xd;ON "SYBYL Ltd_$Service Cr_Memo Line".[Item Category Code] = "SYBYL Ltd_$Item Category".Code&#xd;WHERE "Document No_" = (:creditNoteNo) and "SYBYL Ltd_$Sales Cr_Memo Line".Type = 2;</sql>
+      <sql>SELECT&#xd;Description as item,&#xd;"No_" as itemCode&#xd;      ,"Unit of Measure" as unitOfMeasure&#xd;      ,[Quantity] as qty&#xd;      ,[Unit Price] as unitPrice&#xd;      ,[VAT %] as taxRate&#xd;      ,[Line Discount %] discountTaxRate&#xd;      ,[Line Discount Amount] as discountTotal&#xd;      ,[Amount] as total&#xd;      ,[Amount Including VAT] as amountIncludingVat&#xd;      ,"Item Category Code" as goodsCategoryId&#xd;      ,Discount as discountFlag&#xd;      ,"Deemed Flag" as deemedFlag&#xd;      ,"Excise Flag" as exciseFlag,&#xd;"Bill-to Customer No_" as customerNo,&#xd;"VAT Prod_ Posting Group" as taxCategory&#xd;  FROM "SYBYL Ltd_$Service Cr_Memo Line"&#xd;WHERE "Document No_" = (:creditNoteNo) and Type = 2;</sql>
       <result outputType="json">{&#xd; "creditNoteLines": {&#xd; "line": [&#xd; {&#xd;"item":"$item",&#xd;"itemCode":"$itemCode",&#xd;"unitOfMeasure":"$unitOfMeasure",&#xd;"qty":"$qty",&#xd;"unitPrice":"$unitPrice",&#xd;"taxRate":"$taxRate",&#xd;"discountTaxRate":"$discountTaxRate",&#xd;"discountTotal":"$discountTotal",&#xd;"total":"$total",&#xd;"amountIncludingVat":"$amountIncludingVat",&#xd;"goodsCategoryId":"$goodsCategoryId",&#xd;"discountFlag":"$discountFlag",&#xd;"deemedFlag":"$deemedFlag",&#xd;"exciseFlag":"$exciseFlag",&#xd;"customerNo":"$customerNo",&#xd;"taxCategory":"$taxCategory"}&#xd; ]&#xd; }&#xd;}</result>
       <param name="creditNoteNo" sqlType="STRING"/>
    </query>
@@ -91,6 +91,28 @@
       <param name="uraRefNo" sqlType="STRING"/>
       <param name="documentNumber" sqlType="STRING"/>
       <param name="qrcode" sqlType="STRING"/>
+   </query>
+   <query id="updateServiceInvoiceHeaderQuery" useConfig="navEfris">
+      <sql>UPDATE "SYBYL Ltd_$Service Invoice Header" &#xd;SET "URA Orignal Invoice No_" = (:uraOriginalInvoiceNo), "URA Code" = (:uraQrcode),&#xd;"URA Ref No_" = (:uraRefNo),&#xd;"Tax Area Code" = (:verificationCode)&#xd;WHERE "No_" = (:documentNumber)</sql>
+      <param name="uraOriginalInvoiceNo" sqlType="STRING"/>
+      <param name="uraQrcode" sqlType="STRING"/>
+      <param name="uraRefNo" sqlType="STRING"/>
+      <param name="verificationCode" sqlType="STRING"/>
+      <param name="documentNumber" sqlType="STRING"/>
+   </query>
+   <query id="updateServiceCreditNoteHeaderQuery" useConfig="navEfris">
+      <sql>UPDATE "SYBYL Ltd_$Service Cr_Memo Header" &#xd;SET "External Document No_" = (:uraOriginalInvoiceNo), "URA Code" = (:uraQrcode),&#xd;"URA Ref No_" = (:uraRefNo),&#xd;"Tax Area Code" = (:verificationCode)&#xd;WHERE "No_" = (:documentNumber)</sql>
+      <param name="uraOriginalInvoiceNo" sqlType="STRING"/>
+      <param name="uraQrcode" sqlType="STRING"/>
+      <param name="uraRefNo" sqlType="STRING"/>
+      <param name="verificationCode" sqlType="STRING"/>
+      <param name="documentNumber" sqlType="STRING"/>
+   </query>
+   <query id="updateServiceCreditNoteIdQuery" useConfig="navEfris">
+      <sql>UPDATE "SYBYL Ltd_$Service Cr_Memo Header" &#xd;SET&#xd;"URA Ref No_" = (:uraRefNo),&#xd;"URA Code" = (:qrcode)&#xd;WHERE "No_" = (:documentNumber)</sql>
+      <param name="uraRefNo" sqlType="STRING"/>
+      <param name="qrcode" sqlType="STRING"/>
+      <param name="documentNumber" sqlType="STRING"/>
    </query>
    <resource method="GET" path="getCompanyInformation">
       <call-query href="companyInformation"/>
@@ -175,6 +197,31 @@
          <with-param name="uraRefNo" query-param="uraRefNo"/>
          <with-param name="documentNumber" query-param="documentNumber"/>
          <with-param name="qrcode" query-param="qrcode"/>
+      </call-query>
+   </resource>
+   <resource method="PUT" path="updateServiceInvoiceHeader" returnRequestStatus="true">
+      <call-query href="updateServiceInvoiceHeaderQuery">
+         <with-param name="uraOriginalInvoiceNo" query-param="uraOriginalInvoiceNo"/>
+         <with-param name="uraQrcode" query-param="uraQrcode"/>
+         <with-param name="uraRefNo" query-param="uraRefNo"/>
+         <with-param name="verificationCode" query-param="verificationCode"/>
+         <with-param name="documentNumber" query-param="documentNumber"/>
+      </call-query>
+   </resource>
+   <resource method="PUT" path="updateServiceCreditNoteHeader" returnRequestStatus="true">
+      <call-query href="updateServiceCreditNoteHeaderQuery">
+         <with-param name="uraOriginalInvoiceNo" query-param="uraOriginalInvoiceNo"/>
+         <with-param name="uraQrcode" query-param="uraQrcode"/>
+         <with-param name="uraRefNo" query-param="uraRefNo"/>
+         <with-param name="verificationCode" query-param="verificationCode"/>
+         <with-param name="documentNumber" query-param="documentNumber"/>
+      </call-query>
+   </resource>
+   <resource method="PUT" path="updateServiceCreditNoteId" returnRequestStatus="true">
+      <call-query href="updateServiceCreditNoteIdQuery">
+         <with-param name="uraRefNo" query-param="uraRefNo"/>
+         <with-param name="qrcode" query-param="qrcode"/>
+         <with-param name="documentNumber" query-param="documentNumber"/>
       </call-query>
    </resource>
 </data>
