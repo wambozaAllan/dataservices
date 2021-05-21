@@ -3,7 +3,7 @@
       <property name="driverClassName">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
       <property name="url">jdbc:sqlserver://localhost:1433;databaseName=NAV-EFRIS</property>
       <property name="username">efris</property>
-      <property name="password">password@123</property>
+      <property name="password">password@1234</property>
    </config>
    <query id="companyInformation" useConfig="navEfris">
       <sql>SELECT &#xd;Name as businessName,&#xd;Address as address,&#xd;"Phone No_" as linePhone,&#xd;"VAT Registration No_" as tin,&#xd;"E-Mail" as emailAddress,&#xd;MinBRN as ninBrn,&#xd;"Legal Name" as legalName,&#xd;"Mobile Phone" as mobilePhone,&#xd;"Place Of Business"  as placeOfBusiness,  "Reference No_" as referenceNo,&#xd;"Branch Id" as branchId &#xd;FROM "SYBYL Ltd_$Company Information";</sql>
